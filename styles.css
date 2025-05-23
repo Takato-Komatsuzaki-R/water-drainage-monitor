@@ -1,0 +1,797 @@
+/* 全体のリセットとベーススタイル */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* コンテナ */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ヘッダー */
+.header {
+    background-color: #EFF0F1;
+    color: #282B2F;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ヘッダー内のレイアウトアイコン */
+.layout-icons {
+    display: flex;
+    gap: 8px;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: #282B2F;
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.icon-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.icon-btn.active {
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.icon-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* コンテンツラッパー（サイドバーとメインコンテンツを包む） */
+.content-wrapper {
+    display: flex;
+    flex: 1;
+}
+
+/* サイドバー */
+.sidebar {
+    width: 200px;
+    background-color: #EFF0F1;
+    color: #282B2F;
+    padding: 1rem 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.sidebar li:hover {
+    background-color: #666666;
+}
+
+.sidebar li.active {
+    background-color: #DFE1E4;
+    border-left: 4px solid #ffffff;
+}
+
+/* メインコンテンツエリア */
+.main-content {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+/* ページの管理 */
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+/* レイアウトコントロール */
+.layout-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+.plant-selector select {
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: white;
+    min-width: 200px;
+}
+
+.layout-options {
+    display: flex;
+    gap: 5px;
+}
+
+.layout-btn {
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.25rem 0.75rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.layout-btn.active {
+    background-color: #666666;
+    color: white;
+    border-color: #444444;
+}
+
+.view-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.5rem 1rem;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #e0e0e0;
+    justify-content: flex-end;
+}
+
+.view-control {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.view-control:hover {
+    background-color: #d0d0d0;
+}
+
+.help-btn {
+        color: white;
+}
+
+.zoom-level {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* タブナビゲーション */
+.tab-navigation {
+    display: flex;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+    overflow-x: auto;
+    transition: opacity 0.3s ease, height 0.3s ease;
+}
+
+.tab-btn {
+    padding: 0.75rem 1.5rem;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    color: #666;
+    font-weight: 500;
+}
+
+.tab-btn.active {
+    border-bottom-color: #666666;
+    color: #666666;
+}
+
+/* ダッシュボードコンテナ */
+.dashboard-container {
+    position: relative;
+}
+
+/* レイアウトタイプ: タブ */
+.dashboard-container.tabs .tab-content {
+    display: none;
+}
+
+.dashboard-container.tabs .tab-content.active {
+    display: block;
+}
+
+/* レイアウトタイプ: 2カラム */
+.dashboard-container.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* レイアウトタイプ: 3カラム */
+.dashboard-container.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* レイアウトタイプ: スタック */
+.dashboard-container.stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ダッシュボードタイル共通スタイル */
+.dashboard-tile {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.tile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e6f2ff;
+    background-color: #f8fbff;
+}
+
+.tile-header h2 {
+    font-size: 1rem;
+    margin: 0;
+    color: #0066cc;
+}
+
+.tile-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.tile-control {
+    cursor: pointer;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.tile-control:hover {
+    background-color: #f0f0f0;
+}
+
+.dashboard-tile h2 {
+    font-size: 1.2rem;
+    color: #282B2F;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.tile-content {
+    flex: 1;
+    overflow: auto;
+    padding: 1rem;
+}
+
+/* センサーデータ表示 */
+.sensor-info {
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    position: absolute;
+    min-width: 150px;
+}
+
+.sensor-info h3 {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+.sensor-data .data-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25rem 0;
+    font-size: 0.85rem;
+}
+
+.sensor-data .label {
+    color: #666;
+}
+
+.sensor-data .value {
+    font-weight: 500;
+    padding: 0 0.5rem;
+    border-radius: 3px;
+    text-align: right;
+    min-width: 60px;
+}
+
+.sensor-data .value.high {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
+.sensor-data .value.normal {
+    background-color: #f0f7ff;
+    color: #0277bd;
+}
+
+.sensor-data .value.low {
+    background-color: #e3f2fd;
+    color: #2962ff;
+}
+
+.data-chart {
+    margin-top: 0.5rem;
+}
+
+.chart-placeholder {
+    height: 40px;
+    background: linear-gradient(90deg, rgba(0,255,0,0.2) 0%, rgba(255,255,0,0.2) 50%, rgba(255,0,0,0.2) 100%);
+    border-radius: 3px;
+    position: relative;
+}
+
+.chart-placeholder:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right, transparent 50%, rgba(255,255,255,0.5) 50%);
+    background-size: 4px 100%;
+}
+
+/* センサーリストのテーブルスタイル */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+table th {
+    font-weight: 600;
+    color: #555;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+}
+
+table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+.status {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-align: center;
+    min-width: 50px;
+}
+
+.status.normal {
+    background-color: #e6f2ff;
+    color: #0066cc;
+    border: 1px solid #0066cc;
+}
+
+.status.warning {
+    background-color: #fff8e1;
+    color: #ff8f00;
+    border: 1px solid #ffb300;
+}
+
+.status.alert {
+    background-color: #ffebee;
+    color: #cc0000;
+    border: 1px solid #cc0000;
+}
+
+/* フロー図のスタイル */
+.flow-diagram-container {
+    position: relative;
+    min-height: 700px;
+    background-color: #fff;
+    overflow: auto;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.flow-diagram-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0.8;
+    z-index: 0;
+}
+
+.pipe-box {
+    position: absolute;
+    width: 150px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 2;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.pipe-box:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* 通常時はブルーベース */
+.pipe-box {
+    border: 1px solid #0066cc;
+    background-color: rgba(240, 247, 255, 0.95);
+    box-shadow: 0 2px 5px rgba(0, 102, 204, 0.15);
+}
+
+/* 警告時はイエローベース */
+.pipe-box.warning {
+    border: 1px solid #ffb300;
+    background-color: rgba(255, 248, 225, 0.95);
+    box-shadow: 0 2px 8px rgba(255, 179, 0, 0.2);
+}
+
+/* 発報時（異常時）はレッドベース */
+.pipe-box.alert {
+    border: 1px solid #cc0000;
+    background-color: rgba(255, 235, 238, 0.95);
+    box-shadow: 0 2px 8px rgba(204, 0, 0, 0.2);
+}
+
+.pipe-title {
+    padding: 5px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    background-color: #e6f2ff;
+    color: #0066cc;
+}
+
+.pipe-box.warning .pipe-title {
+    background-color: #fff8e1;
+    color: #ff8f00;
+    border-bottom: 1px solid #ffb300;
+}
+
+.pipe-box.alert .pipe-title {
+    background-color: #ffebee;
+    color: #cc0000;
+    border-bottom: 1px solid #cc0000;
+}
+
+.sensor-data-box {
+    padding: 8px;
+    font-size: 0.9rem;
+}
+
+.sensor-data-box .data-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.sensor-data-box .data-row:last-child {
+    border-bottom: none;
+}
+
+.sensor-data-box .label {
+    color: #444;
+    font-weight: 500;
+    min-width: 40px;
+}
+
+.sensor-data-box .value {
+    text-align: right;
+    font-weight: bold;
+    min-width: 50px;
+    padding: 2px 5px;
+    background-color: #e6f2ff;
+    color: #0066cc;
+    border-radius: 2px;
+}
+
+/* 異常値（高い値）表示 - 赤色 */
+.sensor-data-box .value.high {
+    background-color: #ffebee;
+    color: #cc0000;
+    border: 1px solid rgba(204, 0, 0, 0.3);
+}
+
+/* 通常値表示 - 青色 */
+.sensor-data-box .value.normal {
+    background-color: #e6f2ff;
+    color: #0066cc;
+    border: 1px solid rgba(0, 102, 204, 0.3);
+}
+
+/* 警告値表示 - 黄色 */
+.sensor-data-box .value.warning {
+    background-color: #fff8e1;
+    color: #ff8f00;
+    border: 1px solid rgba(255, 143, 0, 0.3);
+}
+
+/* 低値表示 - 薄い青色 */
+.sensor-data-box .value.low {
+    background-color: #e1f5fe;
+    color: #0288d1;
+    border: 1px solid rgba(2, 136, 209, 0.3);
+}
+
+#sensor-info-a {
+    top: 150px;
+    left: 30px;
+    z-index: 5;
+}
+
+#sensor-info-3d {
+    top: 20px;
+    right: 20px;
+}
+
+/* 3Dビューのプレースホルダー */
+.placeholder-3d {
+    position: relative;
+    height: 100%;
+    min-height: 500px;
+    background-color: #212121;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #78909c;
+    overflow: hidden;
+}
+
+.placeholder-img {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+/* SVG 3Dビュースタイリング */
+.placeholder-img svg {
+    width: 100%;
+    height: 100%;
+    max-height: 600px;
+}
+
+/* パイプのアニメーション効果 */
+@keyframes flow-animation {
+    0% {
+        stroke-dashoffset: 20;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+svg .flow-line {
+    stroke-dasharray: 5, 5;
+    animation: flow-animation 1s linear infinite;
+}
+
+/* 警告表示のアニメーション */
+@keyframes warning-pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+svg .warning-element {
+    animation: warning-pulse 1s infinite;
+}
+
+/* 3Dビューの擬似的な表現 */
+.threejs-3d-view {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+/* 3Dビューのインタラクション */
+.placeholder-img svg g:hover {
+    cursor: pointer;
+    filter: brightness(1.1);
+}
+
+/* 異常警告表示強調 */
+svg .alert-data {
+    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.5));
+}
+
+/* SVG 3Dビューアニメーションとインタラクティブ要素 */
+@keyframes pipe-flow {
+    0% {
+        stroke-dashoffset: 20;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes sensor-pulse {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.3); }
+    100% { filter: brightness(1); }
+}
+
+/* 3D SVGのデータ表示コンテナ */
+.data-container {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    transition: opacity 0.3s ease;
+}
+
+.data-container.warning {
+    background-color: rgba(255, 248, 225, 0.9);
+    border-color: #ffb300;
+}
+
+.data-container.error {
+    background-color: rgba(255, 235, 238, 0.95);
+    border-color: #f44336;
+    box-shadow: 0 2px 10px rgba(244, 67, 54, 0.4);
+}
+
+.data-container .title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.data-container.warning .title {
+    color: #e65100;
+}
+
+.data-container.error .title {
+    color: #b71c1c;
+}
+
+.data-container .value {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    margin-bottom: 2px;
+}
+
+.data-container .value span:first-child {
+    color: #666;
+    margin-right: 10px;
+}
+
+.data-container .value span:last-child {
+    font-weight: 500;
+}
+
+.data-container .value.error-value span:last-child {
+    color: #d50000;
+    font-weight: 600;
+}
+
+/* レスポンシブ対応 */
+@media screen and (max-width: 1100px) {
+    .dashboard-container.grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        padding: 0.5rem 0;
+    }
+    
+    .sidebar ul {
+        display: flex;
+        overflow-x: auto;
+    }
+    
+    .sidebar li {
+        padding: 0.75rem 1rem;
+        white-space: nowrap;
+    }
+    
+    .dashboard-container.grid-2,
+    .dashboard-container.grid-3 {
+        grid-template-columns: 1fr;
+    }
+    
+    .layout-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .layout-options {
+        justify-content: space-between;
+    }
+    
+    .layout-btn {
+        flex: 1;
+        text-align: center;
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .tab-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .header h1 {
+        font-size: 1.25rem;
+    }
+}
